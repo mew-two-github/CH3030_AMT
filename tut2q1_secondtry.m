@@ -12,13 +12,39 @@ xy = spline(yeqbm,xeqbm);
 %part a
 Xeqbm = xeqbm./(1-xeqbm);
 Yeqbm = yeqbm./(1-yeqbm);
+figure(1);
+title('EqbmPlot')
+xlabel('Xeqbm')
+ylabel('Yeqbm')
 plot(Xeqbm,Yeqbm);
 XY = spline(Yeqbm,Xeqbm);
 Xexit = ppval(XY,Yentry);
 Lsmin = Vs*(Yentry-Yexit)/(Xexit);
 %Part b
-Ls = 1.25*Lsmin;
-
 kx=1.25;
 ky=0.075;
 cs = 0.781;
+Ls = 1.25*Lsmin;
+%operating line in terms of mole ratio
+OL = @(val)(Vs/Ls).*(val - Yexit);
+%n points on operating line
+n = 10;
+Y = linspace(Yexit,Yentry,n);
+X = OL(Y);
+x = X./(1+X);
+y = Y./(1+Y);
+%From n points, draw lines of slope -kx/ky and find intersection at eqbm
+%curve. Substitute Xi in terms of the line equation & curve equation,
+%equate them and set to zero
+func = @(yi)(-ky/kx*(yi-y)+x) - ppval(xy,yi);
+yi = fsolve(func,zeros(1,n));
+%Value of function to be integrated
+f = (1+Y)./((y-yi).*(1-y));
+%Integrate yis using trapezoidal rule
+AUC = trapz(y,f);
+H = AUC*(Vs/(cs*3600*ky));
+figure(2);
+title('f(y) vs y(mole fraction)')
+xlabel('y')
+ylabel('f(y)')
+plot(y,f)

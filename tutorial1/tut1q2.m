@@ -19,7 +19,6 @@ ycoords = zeros(1,3);
 ycoords2 = ycoords;
 while y <= Yentry
     i = i + 1;
-    
     x = X(y);
     xcoords(i) = x;
     ycoords(i) = y;

@@ -8,7 +8,7 @@ xeqbm = [0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.95];
 pp = spline(yeqbm,xeqbm);
 fun = @(x)(m*(x-xD)+xD);
 y = xD;
-zF = 0.44;
+zF = 0.43;
 xcoords = zeros(1,7);
 ycoords = zeros(1,7);
 xcoords2 = zeros(1,8);
@@ -27,5 +27,5 @@ while y >= zF
     
 end
 x = linspace(0,1,15);
-qline = @(x)(zeros(size(x))+zF);
+qline = @(x)(zeros(size(x))+zF+.01);
 plot(xeqbm,yeqbm,x,fun(x),x,qline(x),x,x,xcoords,ycoords,'x',xcoords2,ycoords2,'o');

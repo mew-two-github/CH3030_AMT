@@ -8,7 +8,7 @@ qlang = Lang(beta1,c);
 qfreund = Freund(beta,c);
 plot(c,q,'x',c,qlang,c,qfreund);
 title('Equilibrium Adsorption curves');
-legend('Data points','Langmuir', 'Freundlich');
+legend('Data points','Langmuir', 'Freundlich','Location','northwest');
 xlabel('c');
 ylabel('q');
 function y = Freund(parms,c)

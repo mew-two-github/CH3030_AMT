@@ -1,0 +1,7 @@
+xcoords = [0.60,0.70,0.80];
+ycoords = [0.40,0.30,0.175];
+xcoords2 = 1-[0.2750 .2 0.1]-[0.70 0.80 0.875];
+ycoords2 = [0.30,0.20,0.10];
+E1  = F*(yF-yRN)/(yE1-yRN);
+E = ((yE1-ycoords2)*E1-(yF-ycoords2)*F)./(ycoords-ycoords2);
+R = ((yE1-ycoords)*E1-(yF-ycoords)*F)./(ycoords-ycoords2);

@@ -109,9 +109,7 @@ while yp >= yRN
         break;
     end
 end
-plot(linspace(0,1,5),1-linspace(0,1,5));
 plot(xcoords,ycoords,'o',xcoords2,ycoords2,'x');
 %% Mass
 E1  = F*(yF-yRN)/(yE1-yRN);
-E = ((yE1-ycoords2)*E1-(yF-ycoords2)*F)./(ycoords-ycoords2);
-R = ((yE1-ycoords)*E1-(yF-ycoords)*F)./(ycoords-ycoords2);
+E = (yE1-ycoords2)*E1-(yF-ycoords2)

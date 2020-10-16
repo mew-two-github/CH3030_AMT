@@ -49,15 +49,14 @@ Fdel = polyfit([xint,0],[yint,yF],1);
 int = @(x)(polyval(Fdel,x)-ppval(e_p,x));
 xE1 = fsolve(int,0);
 yE1 = ppval(e_p,xE1);
-hold off;
-figure();
+%hold off;
+%figure();
 hold on; grid on; grid minor;
 plot([xint1,1],[polyval(line1,xint1),0]);
-plot([xint,xE1],polyval(Fdel,[xint,xE1]));
-plot(r_tce,r_a,e_tce,e_a);
-%Plotting the axes
-plot(zeros(1,2),linspace(-0.5,1,2));
-plot(linspace(-0.5,1,2),zeros(1,2));
+plot([xint,xE1],polyval(Fdel,[xint,xE1]),'-.');
+xlabel('TCE MASS FRACTION');
+ylabel('ACETONE MASS FRACTION');
+hold off;
 %% Getting Smin
 %Find intersection of EF and RS
 mER = (yE1-yRN)/(xE1-xRN);
@@ -65,6 +64,14 @@ xM = (yF-yRN+mER*xRN)/(mER+yF);
 yM = -yF*xM+yF;
 Smin = F*(yF-yM)/(yM);
 %% Stages
+figure();
+plot(r_tce,r_a,e_tce,e_a);
+hold on;
+%Conjugate Curve
+plot(linspace(0.3,0.8,5),ppval(curve,linspace(0.3,0.8,5)));
+%Plotting the axes
+plot(zeros(1,2),linspace(-0.5,1,2));
+plot(linspace(-0.5,1,2),zeros(1,2));
 S = 1.5*Smin;
 yMnew = F*yF/(F+S);
 RM = polyfit([xRN,S/(F+S)],[yRN,yMnew],1);
@@ -111,7 +118,9 @@ while yp >= yRN
 end
 plot(linspace(0,1,5),1-linspace(0,1,5));
 plot(xcoords,ycoords,'o',xcoords2,ycoords2,'x');
+xlabel('TCE MASS FRACTION');
+ylabel('ACETONE MASS FRACTION');
 %% Mass
-E1  = F*(yF-yRN)/(yE1-yRN);
-E = ((yE1-ycoords2)*E1-(yF-ycoords2)*F)./(ycoords-ycoords2);
-R = ((yE1-ycoords)*E1-(yF-ycoords)*F)./(ycoords-ycoords2);
+E1  = (F*(yF-yRN)-S*yRN)/(yE1-yRN);
+E = ((yE1-ycoords2(1:2))*E1-(yF-ycoords2(1:2))*F)./(ycoords(2:3)-ycoords2(1:2));
+R = ((yE1-ycoords(2:3))*E1-(yF-ycoords(2:3))*F)./(ycoords(2:3)-ycoords2(1:2));

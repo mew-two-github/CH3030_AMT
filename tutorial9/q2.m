@@ -127,7 +127,7 @@ while y0 < 0.2
     i = i + 1;
 end
 plot(xcoords,ycoords,'x',xcoords2,ycoords2,'o');
-%% Extract limit
-f = @(x)(ppval(yx,x)-ppval(OL,x));
-xlimit = fsolve(f,0.45);
-ylimit = ppval(OL,xlimit);
+% %% Extract limit
+% f = @(x)(ppval(yx,x)-ppval(OL,x));
+% xlimit = fsolve(f,0.45);
+% ylimit = ppval(OL,xlimit);
